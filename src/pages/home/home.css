@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.banner{
+width: 100vw;
+height: 85vh;
+background-image: url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D');
+background-size: cover;
+}
+.banner h1{
+  text-align: center;
+  width: 100%;
+}
+
+.linkDiv {
+  text-align: justify;
+  transition: transform 0.3s ease-in-out;
+}
+
+.linkDiv:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+
+/* .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(39, 127, 179, 0.5); /* Change the opacity as needed */
+  /* z-index: 1; */
+/* }  */
+/* .content {
+    position: relative;
+    z-index: 2;
+  } */
