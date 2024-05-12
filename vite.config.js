@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ["react-router-dom", '@mui/x-date-pickers', "@mui/icons-material/Menu", '@mui/lab', '@mui/material', '@mui/icons-material', '@mui/system', '@mui/icons-material/ArrowForward'],
+      external: ["react-router-dom", '@mui/x-date-pickers', "@mui/icons-material/Menu", '@mui/lab', '@mui/material', '@mui/icons-material', 
+      '@mui/system', '@mui/icons-material/ArrowForward', "@mui/icons-material/Adb", '@mui/icons-material/Share', ],
      
     },
     outDir: 'dist', // Output directory
