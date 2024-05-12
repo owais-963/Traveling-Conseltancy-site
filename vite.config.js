@@ -6,8 +6,12 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ["react-router-dom", '@mui/x-date-pickers', '@mui/lab', '@mui/material', '@mui/icons-material', '@mui/system'],
+      external: ["react-router-dom", '@mui/x-date-pickers', '@mui/lab', '@mui/material', '@mui/icons-material', '@mui/system', '@mui/icons-material/ArrowForward'],
      
     },
+    outDir: 'dist', // Output directory
+    assetsDir: 'assets', // Assets directory
+    sourcemap: true, // Generate source maps
+    minify: true, 
   },
 })
