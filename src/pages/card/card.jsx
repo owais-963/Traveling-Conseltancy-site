@@ -48,7 +48,7 @@ const RecipeReviewCard = () => {
   };
 
   const showBlog = (title) =>{
-    navigate(`/blog/${title}`);
+    navigate(`/blogs/${title}`);
   }
 
   return (
