@@ -6,44 +6,53 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [
+  {name: "Home", to: 'home'},
+  {name: "About us", to: 'about'},
+  {name: "services", to: "services"},
+  { name: 'Packages', to: 'packages' },
+  { name: 'Blogs', to: 'blogs' },
+  { name: 'Contact us', to: 'contact' },
+  
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const location = useLocation();
+  const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleNavClick = (page) => {
+    if (location.pathname !== '/') {
+      navigate(`/#${page.to}`);
+    } else {
+      scroll.scrollTo(document.getElementById(page.to).offsetTop);
+    }
+    handleCloseNavMenu();
   };
 
   return (
-    <AppBar position="static" sx={{ width: '100%', bgcolor:'#4e91fd' }}>
-      <Toolbar disableGutters sx={{marginLeft: 5}}>
+    <AppBar position="fixed" sx={{ width: '100%', bgcolor: '#4e91fd' }}>
+      <Toolbar disableGutters sx={{ marginLeft: 5 }}>
         <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
         <Typography
           variant="h6"
           noWrap
           component="a"
-          href="#app-bar-with-responsive-menu"
+          href="#"
           sx={{
             mr: 2,
             display: { xs: 'none', md: 'flex' },
@@ -54,7 +63,7 @@ function ResponsiveAppBar() {
             textDecoration: 'none',
           }}
         >
-          BLOGY
+          FLIER
         </Typography>
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -87,8 +96,8 @@ function ResponsiveAppBar() {
             }}
           >
             {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+              <MenuItem key={page.name} onClick={() => handleNavClick(page)} sx={{ cursor: 'pointer' }}>
+                <Typography textAlign="center">{page.name}</Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -98,7 +107,7 @@ function ResponsiveAppBar() {
           variant="h5"
           noWrap
           component="a"
-          href="#app-bar-with-responsive-menu"
+          href="#"
           sx={{
             mr: 2,
             display: { xs: 'flex', md: 'none' },
@@ -114,47 +123,22 @@ function ResponsiveAppBar() {
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map((page) => (
-            <Button
-              key={page}
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {page}
-            </Button>
+            <Box key={page.name} sx={{ cursor: 'pointer' }}>
+              {location.pathname === '/' ? (
+                <ScrollLink to={page.to} smooth duration={500} style={{ textDecoration: 'none' }}>
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+                </ScrollLink>
+              ) : (
+                <RouterLink to={`/#${page.to}`} style={{ textDecoration: 'none' }}>
+                  <Button sx={{ my: 2, color: 'white', display: 'block' }}>{page.name}</Button>
+                </RouterLink>
+              )}
+            </Box>
           ))}
         </Box>
-
-        {/* <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
-          >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box> */}
       </Toolbar>
     </AppBar>
   );
 }
 export default ResponsiveAppBar;
+

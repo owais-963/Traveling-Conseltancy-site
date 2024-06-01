@@ -1,6 +1,7 @@
 import ResponsiveAppBar from "./navbar/navbar";
-import Home from "./home/home";
+// import Home from "./home/home";
 import RoutesConfig from "./routes";
+import Footer from "./footer/footer";
 import React from 'react'
 
 function IndexPage() {
@@ -8,6 +9,7 @@ function IndexPage() {
     <div>
     <ResponsiveAppBar />
     <RoutesConfig />
+    <Footer />
     </div>
   )
 }
